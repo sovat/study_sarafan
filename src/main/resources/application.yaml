@@ -1,0 +1,16 @@
+server:
+  port: 1337
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sarafan
+    username: postgres
+    password: admin
+  jpa:
+    generate-ddl: true
+
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true

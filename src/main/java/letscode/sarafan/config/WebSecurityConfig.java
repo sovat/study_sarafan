@@ -31,22 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PrincipalExtractor principalExtractor(UserDetailsRepository repository) {
         return map -> {
             String id = (String) map.get("sub");
-
             User user = repository.findById(id).orElseGet(() -> {
                 User newUser = new User();
 
                 newUser.setId(id);
-                newUser.setName((String) map.get("name"));
                 newUser.setEmail((String) map.get("email"));
                 newUser.setGender((String) map.get("gender"));
                 newUser.setLocale((String) map.get("locale"));
                 newUser.setUserpic((String) map.get("picture"));
-
                 return newUser;
             });
-
             user.setLastVisit(LocalDateTime.now());
-
             return repository.save(user);
         };
     }
